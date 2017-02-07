@@ -91,8 +91,9 @@ class Echart(Base):
         return json
 
     def _html(self):
-        with open(os.path.join(os.path.dirname(__file__), 'plot.j2')) as f:
+        with open(os.path.join(os.path.dirname(__file__), 'plot.j2'),'rb') as f:
             template = f.read()
+            template = template.decode('utf-8')
             return template.replace('{{ opt }}', json.dumps(self.json, indent=4))
 
     def plot(self, persist=True):
